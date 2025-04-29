@@ -46,24 +46,7 @@ function FavoritesPage() {
       return;
     }
 
-    const data = [
-      {
-        id: 1,
-        title: 'Gaming Laptop',
-        description: 'Võimas mänguri sülearvuti RTX 4080-ga',
-        image: 'https://picsum.photos/300/200?random=10',
-        category: 'Arvutid',
-        rating: 5,
-      },
-      {
-        id: 2,
-        title: 'Mehaaniline Klaviatuur',
-        description: 'RGB valgustusega mänguri klaviatuur',
-        image: 'https://picsum.photos/300/200?random=11',
-        category: 'Lisaseadmed',
-        rating: 4,
-      }
-    ];
+    const data = [];  // Initialize with empty array instead of premade items
 
     cache.data = data;
     cache.timestamp = Date.now();

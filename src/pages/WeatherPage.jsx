@@ -38,59 +38,70 @@ function WeatherPage() {
   };
 
   return (
-    <Box>
-      <Typography variant="h4" gutterBottom>
-        Ilmateade
-      </Typography>
+    <Box 
+      sx={{ 
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '80vh',
+        width: '100%'
+      }}
+    >
+      <Box sx={{ width: '100%', maxWidth: 600, textAlign: 'center' }}>
+        <Typography variant="h4" gutterBottom>
+          Ilmateade
+        </Typography>
 
-      <Box sx={{ mb: 4, display: 'flex', gap: 2, alignItems: 'center' }}>
-        <TextField
-          label="Sisesta linna nimi"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          onKeyPress={(e) => {
-            if (e.key === 'Enter') {
-              handleSearch();
-            }
-          }}
-          disabled={loading}
-        />
-        <Button 
-          variant="contained" 
-          onClick={handleSearch}
-          disabled={loading}
-        >
-          {loading ? <CircularProgress size={24} color="inherit" /> : 'Otsi'}
-        </Button>
+        <Box sx={{ mb: 4, display: 'flex', gap: 2, alignItems: 'center', justifyContent: 'center' }}>
+          <TextField
+            label="Sisesta linna nimi"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleSearch();
+              }
+            }}
+            disabled={loading}
+          />
+          <Button 
+            variant="contained" 
+            onClick={handleSearch}
+            disabled={loading}
+          >
+            {loading ? <CircularProgress size={24} color="inherit" /> : 'Otsi'}
+          </Button>
+        </Box>
+
+        {error && (
+          <Paper elevation={3} sx={{ p: 2, mb: 2, bgcolor: '#fff3f3' }}>
+            <Typography color="error">
+              {error}
+            </Typography>
+          </Paper>
+        )}
+
+        {weatherData && (
+          <Paper elevation={3} sx={{ p: 3, maxWidth: 400, mx: 'auto' }}>
+            <Typography variant="h5" gutterBottom>
+              {weatherData.name}
+            </Typography>
+            <Typography variant="h6">
+              Temperatuur: {weatherData.main.temp}°C
+            </Typography>
+            <Typography>
+              Kirjeldus: {weatherData.weather[0].description}
+            </Typography>
+            <Typography>
+              Õhuniiskus: {weatherData.main.humidity}%
+            </Typography>
+            <Typography>
+              Tuule kiirus: {weatherData.wind.speed} m/s
+            </Typography>
+          </Paper>
+        )}
       </Box>
-
-      {error && (
-        <Paper elevation={3} sx={{ p: 2, mb: 2, bgcolor: '#fff3f3' }}>
-          <Typography color="error">
-            {error}
-          </Typography>
-        </Paper>
-      )}
-
-      {weatherData && (
-        <Paper elevation={3} sx={{ p: 3, maxWidth: 400 }}>
-          <Typography variant="h5" gutterBottom>
-            {weatherData.name}
-          </Typography>
-          <Typography variant="h6">
-            Temperatuur: {weatherData.main.temp}°C
-          </Typography>
-          <Typography>
-            Kirjeldus: {weatherData.weather[0].description}
-          </Typography>
-          <Typography>
-            Õhuniiskus: {weatherData.main.humidity}%
-          </Typography>
-          <Typography>
-            Tuule kiirus: {weatherData.wind.speed} m/s
-          </Typography>
-        </Paper>
-      )}
     </Box>
   );
 }

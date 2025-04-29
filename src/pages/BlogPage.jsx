@@ -22,16 +22,7 @@ import {
   Comment as CommentIcon,
 } from '@mui/icons-material';
 
-const initialPosts = [
-  {
-    id: 1,
-    title: 'Esimene blogipostitus',
-    description: 'See on esimese blogipostituse sisu.',
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-    comments: [],
-  },
-];
+const initialPosts = [];
 
 function BlogPage() {
   const [posts, setPosts] = useState(initialPosts);
